@@ -26,6 +26,8 @@ const app = Vue.createApp({
             products: [], //產品
             productId: '', //產品id
             isLoadingItem: '',
+            isLoading: false,
+            fullPage: true,
             form: {
                 user: {
                   name: '',
@@ -46,7 +48,9 @@ const app = Vue.createApp({
         },
         openProductModal(id){
             this.productId = id;
-            this.$refs.productModal.openModal();
+            setTimeout( ()=> {
+                this.$refs.productModal.openModal();
+            }, 700);
         },
         getCart(){
             axios.get(`${apiUrl}/api/${apiPath}/cart`)
@@ -155,7 +159,7 @@ const app = Vue.createApp({
                 icon: "success",
                 confirmButtonColor: "#008000",
             }); 
-        }
+        },
     },
     components: {
         VForm: Form,
@@ -165,6 +169,11 @@ const app = Vue.createApp({
     mounted(){
         this.getProducts();
         this.getCart();
+        this.isLoading = true;
+        setTimeout(() => {
+        // 3 秒後結束 loading
+        this.isLoading = false;
+      },3000);
     }
 })
 //全域註冊
@@ -203,5 +212,6 @@ app.component('product-modal', {
     mounted(){
         this.modal = new bootstrap.Modal(this.$refs.modal);
     }
-})
+});
+app.component('loading', VueLoading.Component);
 app.mount('#app');
