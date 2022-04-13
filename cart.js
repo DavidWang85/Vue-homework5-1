@@ -167,13 +167,13 @@ const app = Vue.createApp({
         ErrorMessage: ErrorMessage,
     },
     mounted(){
-        this.getProducts();
-        this.getCart();
         this.isLoading = true;
         setTimeout(() => {
-        // 3 秒後結束 loading
+        // 0.8 秒後結束 loading
         this.isLoading = false;
-      },3000);
+        },800);
+        this.getProducts();
+        this.getCart();
     }
 })
 //全域註冊
