@@ -33,7 +33,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="product in products" :keys="product.id">
+              <tr v-for="product in products" :key="product.id">
                 <td style="width: 200px">
                   <div 
                   :style="{backgroundImage:`url(${product.imageUrl})`}"
